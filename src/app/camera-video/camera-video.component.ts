@@ -65,7 +65,7 @@ export class CameraVideoComponent {
     let formData = new FormData();
     formData.append('file', file, file.name);
 
-    fetch("http://127.0.0.1/upload", {
+    fetch("https://cncz.app/upload", {
       method: 'POST',
       body: formData
     })
