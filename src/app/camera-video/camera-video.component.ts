@@ -63,9 +63,9 @@ export class CameraVideoComponent {
     this.sharedService.setImage(webcamImage);
     let file = this.handleCapturedImage(webcamImage);
     let formData = new FormData();
-    formData.append('image', file, file.name);
+    formData.append('file', file, file.name);
 
-    fetch("localhost:5000/upload", {
+    fetch("http://127.0.0.1/upload", {
       method: 'POST',
       body: formData
     })
