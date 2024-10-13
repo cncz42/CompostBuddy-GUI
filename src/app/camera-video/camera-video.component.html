@@ -1,6 +1,6 @@
 <div class="initial-state_1-2">
   <div class="camera-video_8-2">
-    <webcam [width]="393" [height]="852">
+    <webcam [width]="393" [height]="852" imageType="image/png" [trigger]="triggerObservable" (imageCapture)="handleImage($event)">
 
     </webcam>
     <!--
@@ -16,7 +16,7 @@
     -->
   </div>
   <div class="camera-button_78-311">
-    <div class="ellipse-1_8-3">
+    <button class="actionBtn" (click)="triggerSnapshot();">
       <svg
         width="77"
         height="75"
@@ -70,7 +70,7 @@
           </foreignObject>
         </switch>
       </svg>
-    </div>
+    </button>
   </div>
   <div class="flash_8-4">
     <img
