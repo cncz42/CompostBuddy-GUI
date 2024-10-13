@@ -18,6 +18,8 @@ import {Router} from '@angular/router';
   standalone: true
 })
 
+
+
 export class CameraVideoComponent {
   constructor(private sharedService: SharedService, private router: Router) {}
   private trigger: Subject<void> = new Subject<void>();
@@ -26,6 +28,20 @@ export class CameraVideoComponent {
     width: {ideal: 393},
     height: {ideal: 852}
   };
+  //old ah js function I found to do this oddly specific thing
+  handleCapturedImage(webcamImage: WebcamImage) {
+    this.webcamImage = webcamImage;
+    const arr = this.webcamImage.imageAsDataUrl.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], "pain.png", { type: "image/png" });
+
+  }
 
   sendData(image: WebcamImage, compostable: boolean, name: string): void {
     this.sharedService.setStatus(compostable);
@@ -45,32 +61,23 @@ export class CameraVideoComponent {
   public handleImage(webcamImage: WebcamImage): void {
     console.info('received webcam image', webcamImage);
     this.sharedService.setImage(webcamImage);
-    let image = webcamImage.imageData
+    let file = this.handleCapturedImage(webcamImage);
+    let formData = new FormData();
+    formData.append('image', file, file.name);
 
-    // shout out chatGPT for this JANK image conversion but JS is weird like that
-    const canvas = document.createElement('canvas');
-    canvas.width = image.width;
-    canvas.height = image.height;
-    const ctx = canvas.getContext('2d');
-    ctx.putImageData(image, 0, 0);
-
-    canvas.toBlob((blob) => {
-      const formData = new FormData();
-      formData.append('image', blob, (Math.random() + 1).toString(36).substring(7) +'.png');
-
-      fetch("http://localhost:5000", {
-        method: 'POST',
-        body: formData
+    fetch("localhost:5000/upload", {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.sharedService.setStatus(data.compostable);
+        this.sharedService.setName(data.message);
       })
-        .then(response => response.json())
-        .then(data => {
-          this.sharedService.setStatus(data.compostable);
-          this.sharedService.setName(data.message);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }, 'image/png');
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
     this.router.navigate(['/results']);
   }
 }
