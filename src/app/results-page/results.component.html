@@ -1,6 +1,6 @@
-<div class="iphone-16---1_26-31">
-  <div class="bkg_26-77">
-    <div class="ellipse-2_26-34">
+<div class="iphone-16---1_26-167">
+  <div class="bkg_26-169">
+    <div class="ellipse-2_26-170">
       <svg
         width="162"
         height="369"
@@ -11,7 +11,7 @@
         <ellipse cx="-49.5" cy="184.5" rx="211.5" ry="184.5" fill="#CBB7AA" />
       </svg>
     </div>
-    <div class="ellipse-1_26-32">
+    <div class="ellipse-1_26-171">
       <svg
         width="208"
         height="210"
@@ -22,7 +22,7 @@
         <ellipse cx="223" cy="20" rx="223" ry="190" fill="#CBB7AA" />
       </svg>
     </div>
-    <div class="ellipse-3_26-33">
+    <div class="ellipse-3_26-172">
       <svg
         width="216"
         height="219"
@@ -37,7 +37,7 @@
         />
       </svg>
     </div>
-    <div class="ellipse-4_26-35">
+    <div class="ellipse-4_26-173">
       <svg
         width="173"
         height="385"
@@ -53,20 +53,46 @@
       </svg>
     </div>
   </div>
-  <span style="white-space: pre-line" class="text-title_26-36">Compost Buddy</span>
-  <button class="start-button_26-37" [routerLink]="['/camera']">
-    <div class="rectangle-1_26-38">
+  <div class="img-frame_26-194">
+    <img class ="img-photo" [src]="image.imageAsDataUrl"/>
+  </div>
+  <div class="img-placeholder_26-195">
+    <svg
+      width="299"
+      height="388"
+      viewBox="0 0 299 388"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="299" height="388" fill="#D9D9D9" />
+    </svg>
+  </div>
+  <span class="text-item-title-placeholder_26-197">{{name}}</span>
+  <span class="text-result_26-199">Your item is:</span>
+  <app-info [size]="'32'" class="info_26-213"></app-info>
+  <button class="start-button_2004-16" [routerLink]="['/landing']">
+    <div class="rectangle-1_2004-17">
       <img
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAQUA+v8AAAAAAAAFAAFkeJU4AAAAAElFTkSuQmCC"
       />
     </div>
-    <div class="ellipse-5_26-39">
-      <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAQUA+v8AAAAAAAAFAAFkeJU4AAAAAElFTkSuQmCC"
-      />
+    <div class="ellipse-5_2004-18">
+      <svg
+        width="213"
+        height="76"
+        viewBox="0 0 213 76"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <ellipse cx="110" cy="30.5" rx="121" ry="114.5" fill="#637755" />
+      </svg>
     </div>
-    <span class="text-start_26-40">start</span>
-    <app-camera [size]="'48'" class="camera_26-41"></app-camera>
+    <span class="text-try-another-_2004-19">try another!</span>
   </button>
-  <span class="text-slogan_26-42">Save the Earth!</span>
+  @if (compostable) {
+    <span class="text-compostable">COMPOSTABLE</span>
+  } @else {
+    <span class="text-noncompostable">NOT COMPOSTABLE</span>
+  }
+
 </div>

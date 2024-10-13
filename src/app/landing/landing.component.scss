@@ -54,6 +54,9 @@
   display: flex;
   width: 213px;
   height: 76px;
+  background: transparent;
+  border: none !important;
+  font-size:0;
 }
 .rectangle-1_26-38 {
   display: flex;
@@ -96,4 +99,10 @@
   text-wrap: nowrap;
   width: 178px;
   height: 26px;
+}
+
+.tocamera {
+  background: transparent;
+  border: none !important;
+  font-size:0;
 }
